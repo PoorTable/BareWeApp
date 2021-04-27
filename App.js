@@ -18,7 +18,11 @@ const rootReducer = combineReducers({
   dailyhoutly: dailyhoutlyreducer
 });
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
+const store = createStore(rootReducer, 
+  composeWithDevTools(
+    applyMiddleware(ReduxThunk)
+    )
+);
 
 const AppWrapper = () => {
   return (
