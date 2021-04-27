@@ -21,47 +21,7 @@ export const selectDay = (index) => {
 
 const fillFile = () =>{
   return async (dispatch, getState) => {
-    if((await Network.getNetworkStateAsync()).type!=="NONE"){
-      dispatch({ type: NERROR, errorState: false });
-      let date = Math.floor((Date.now() - 86400000)/1000);
-      console.log(date);
-      const response = await fetch(
-        `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${date}&units=metric&appid=${apik}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      
-      const resData = await response.json();
-      
-      const Hourly = resData.hourly;
-      const loadedYesterday = [];
-      Hourly.forEach((element) => {
-          loadedYesterday.push(
-            new City(
-              Math.random().toString(),
-              1,
-              element.temp,
-              element.weather[0].icon,
-              element.dt-10800
-            )
-          );
-      });
-      try{
-        await RNFS.writeFile(path, JSON.stringify(resData));
-        console.log('succes');  
-      }
-      catch(err){
-        console.log(err);
-      }
-      const dt = Hourly[0].dt*1000;
-      dispatch({ type: SET_DATE, dt: dt });
-      dispatch({ type: GET_YESTERDAY, Yesterday: loadedYesterday });
-    }
-    else{
-      dispatch({ type: NERROR, errorState: true});
-    }
+    
   }
 }
 
@@ -107,11 +67,91 @@ export const getYesterday = (lat, lon) => {
         dispatch({ type: GET_YESTERDAY, Yesterday: loadedYesterday });
       }
       else{
-        fillFile();
+        if((await Network.getNetworkStateAsync()).type!=="NONE"){
+          dispatch({ type: NERROR, errorState: false });
+          let date = Math.floor((Date.now() - 86400000)/1000);
+          console.log(date);
+          const response = await fetch(
+            `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${date}&units=metric&appid=${apik}`
+          );
+    
+          if (!response.ok) {
+            throw new Error("Something went wrong!");
+          }
+          
+          const resData = await response.json();
+          
+          const Hourly = resData.hourly;
+          const loadedYesterday = [];
+          Hourly.forEach((element) => {
+              loadedYesterday.push(
+                new City(
+                  Math.random().toString(),
+                  1,
+                  element.temp,
+                  element.weather[0].icon,
+                  element.dt-10800
+                )
+              );
+          });
+          try{
+            await RNFS.writeFile(path, JSON.stringify(resData));
+            console.log('succes');  
+          }
+          catch(err){
+            console.log(err);
+          }
+          const dt = Hourly[0].dt*1000;
+          dispatch({ type: SET_DATE, dt: dt });
+          dispatch({ type: GET_YESTERDAY, Yesterday: loadedYesterday });
+        }
+        else{
+          dispatch({ type: NERROR, errorState: true});
+        }
       }
     }
     else{
-      fillFile();
+      if((await Network.getNetworkStateAsync()).type!=="NONE"){
+        dispatch({ type: NERROR, errorState: false });
+        let date = Math.floor((Date.now() - 86400000)/1000);
+        console.log(date);
+        const response = await fetch(
+          `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${date}&units=metric&appid=${apik}`
+        );
+  
+        if (!response.ok) {
+          throw new Error("Something went wrong!");
+        }
+        
+        const resData = await response.json();
+        
+        const Hourly = resData.hourly;
+        const loadedYesterday = [];
+        Hourly.forEach((element) => {
+            loadedYesterday.push(
+              new City(
+                Math.random().toString(),
+                1,
+                element.temp,
+                element.weather[0].icon,
+                element.dt-10800
+              )
+            );
+        });
+        try{
+          await RNFS.writeFile(path, JSON.stringify(resData));
+          console.log('succes');  
+        }
+        catch(err){
+          console.log(err);
+        }
+        const dt = Hourly[0].dt*1000;
+        dispatch({ type: SET_DATE, dt: dt });
+        dispatch({ type: GET_YESTERDAY, Yesterday: loadedYesterday });
+      }
+      else{
+        dispatch({ type: NERROR, errorState: true});
+      }
     }
 
   };
