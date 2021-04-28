@@ -67,9 +67,13 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     fontWeight: "bold",
     fontSize: 20,
+    fontFamily: 'Roboto-LightItalic',
+    fontWeight: "bold",
   },
   temperature: {
     fontSize: 17,
+    fontFamily: 'Roboto-LightItalic',
+    fontWeight: "bold"
   },
 });
 

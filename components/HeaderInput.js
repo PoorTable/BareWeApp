@@ -48,7 +48,7 @@ const HeaderInput = (props) => {
 const styles = StyleSheet.create({
   droidSafeArea: {
     flexDirection: "row",
-
+    
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,

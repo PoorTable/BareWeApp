@@ -29,7 +29,7 @@ const fillFile = () =>{
 export const openFile = () => {
   return async (dispatch, getState) => {
     var RNFS = require('react-native-fs');
-    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.ExternalDirectoryPath + 'datas.txt' : RNFS.DocumentDirectoryPath + 'datas.json';
+    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.DocumentDirectoryPath + 'datas.txt' : RNFS.DocumentDirectoryPath + 'datas.json';
     let exists =  await RNFS.exists(path);
     if(exists){
       FileViewer.open(path, { showOpenWithDialog: true, showAppsSuggestions: true})
@@ -44,7 +44,7 @@ export const openFile = () => {
 export const getYesterday = (lat, lon) => {
   return async (dispatch, getState) => {
     var RNFS = require('react-native-fs');
-    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.ExternalDirectoryPath + 'datas.txt' : RNFS.DocumentDirectoryPath + 'datas.json';
+    var path = Platform.OS.toLowerCase() === 'android' ? RNFS.DocumentDirectoryPath + 'datas.txt' : RNFS.DocumentDirectoryPath + 'datas.json';
     let exists =  await RNFS.exists(path);
     if(exists){
       let a = await RNFS.readFile(path);

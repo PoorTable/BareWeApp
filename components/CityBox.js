@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10,
     textAlign: "center",
+    fontFamily: 'Roboto-LightItalic',
+    fontWeight: "bold"
   },
   CityIcon: {
     marginTop: 9,
@@ -56,6 +58,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginTop: 5,
     textAlign: "center",
+    fontFamily: 'Roboto-LightItalic',
+    fontWeight: "bold"
   },
   centred: {
     flex: 1,
