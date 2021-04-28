@@ -6,6 +6,7 @@ import {
 	View,
 	Image,
 	FlatList,
+	SafeAreaView,
 } from "react-native";
 
 import HeaderInput from "../../components/HeaderInput";
@@ -15,6 +16,7 @@ import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 
 export default function CitiesScreen({ navigation, ...props }) {
 	const {
+		flatListColumns,
 		pTRHandler,
 		SelectCityHandler,
 		ClearText,
@@ -27,7 +29,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 		isEmpty,
 	} = props;
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<View style={styles.searchBar}>
 				<HeaderInput
 					value={searchText}
@@ -49,6 +51,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 					<ModalActivityIndcator show={true} />
 				) : searchText === "" ? (
 					<FlatList
+						key={flatListColumns}
 						data={Cities}
 						renderItem={(itemData) => (
 							<CityBox
@@ -60,7 +63,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 								}}
 							/>
 						)}
-						numColumns={2}
+						numColumns={flatListColumns}
 						refreshing={isRefreshing}
 						onRefresh={() => {
 							pTRHandler();
@@ -91,7 +94,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 					</View>
 				)}
 			</ImageBackground>
-		</View>
+		</SafeAreaView>
 	);
 }
 

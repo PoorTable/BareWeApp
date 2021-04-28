@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Alert } from "react-native";
+import { Alert, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as weatherActions from "../../store/weatheractions";
 import CitiesView from "./CitiesView";
@@ -16,6 +16,7 @@ export default function CitiesScreen({ navigation }) {
 		return unsubscribe;
 	}, [navigation]);
 
+	const [flatListColumns, setFlatListColumns] = useState(2);
 	const [searchText, setSeacrhText] = useState("");
 	const [isEmpty, setIsEmpty] = useState(false);
 	const [isRefreshing, setIsRefreshing] = useState(false);
@@ -23,6 +24,11 @@ export default function CitiesScreen({ navigation }) {
 	const Cities = useSelector((state) => state.weather.cities);
 	var Citiy = useSelector((state) => state.weather.city);
 	const loading = useSelector((state) => state.weather.isLoading);
+
+	const onOrientationChange = () => {
+		setFlatListColumns(Dimensions.get("window").width > 600 ? 3 : 2);
+	};
+	Dimensions.addEventListener("change", onOrientationChange);
 
 	const timerRef = useRef(null);
 	const changeTextHandler = (text) => {
@@ -102,6 +108,7 @@ export default function CitiesScreen({ navigation }) {
 			isRefreshing={isRefreshing}
 			changeTextHandler={changeTextHandler}
 			isEmpty={isEmpty}
+			flatListColumns={flatListColumns}
 		/>
 	);
 }
