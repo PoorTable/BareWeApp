@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 5,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 		fontSize: 20,
 	},
 	text: {

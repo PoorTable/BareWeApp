@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 		width: "75%",
 		height: 50,
 	},

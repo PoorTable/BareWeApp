@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 	},
 	WeatherIcon: {
 		marginVertical: 20,

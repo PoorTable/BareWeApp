@@ -12,7 +12,6 @@ import HeaderInput from "../../components/HeaderInput";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
-import { black } from "react-native-paper/lib/typescript/styles/colors";
 
 export default function CitiesScreen({ navigation, ...props }) {
 	const {
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 	},
 	sr: {
 		marginVertical: 10,

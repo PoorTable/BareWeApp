@@ -65,14 +65,14 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 	},
 	text: {
 		color: "#fff",
 		fontSize: 16,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: black,
+		color: "black",
 	},
 	access: {
 		backgroundColor: "#694fad",
