@@ -29,7 +29,7 @@ const SelectedCityScreen = (props) => {
 					uri:
 						"https://t4.ftcdn.net/jpg/03/25/68/63/360_F_325686385_7xPlV6ZN5HMj15QJ9LRr8gOsk2nyP4pM.jpg",
 				}}
-				style={{ flex: 1 }}
+				style={styles.container}
 			>
 				<Text style={styles.time}>{date}</Text>
 				<Text style={styles.time}>{time}</Text>
@@ -51,6 +51,7 @@ const SelectedCityScreen = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		width: "100%",
 		justifyContent: "center",
 		alignItems: "center",
 	},
