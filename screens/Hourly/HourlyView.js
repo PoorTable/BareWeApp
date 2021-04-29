@@ -66,7 +66,7 @@ const HourlyView = (props) => {
 						/>
 						<BottomSheet
 							isVisible={isVisible}
-							containerStyle={{ backgroundColor: "rgba(0.5, 0.25, 0, 0.2)" }}
+							containerStyle={{ backgroundColor: "rgba(0.5, 0.25, 0, 0.0)" }}
 						>
 							{List.map((l, i) => (
 								<ListItem
