@@ -4,69 +4,69 @@ import { BottomTabs } from "./navigation/WeatherNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { useDispatch } from "react-redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import * as SplashScreen from "expo-splash-screen";
+import PushNotification from "react-native-push-notification";
 
 import weatherreducer from "./store/weatherreducer";
-import dailyhoutlyreducer from './store/dailyhourlyreducer';
+import dailyhoutlyreducer from "./store/dailyhourlyreducer";
 import * as weatherActions from "./store/weatheractions";
 
 const rootReducer = combineReducers({
-  weather: weatherreducer,
-  dailyhoutly: dailyhoutlyreducer
+	weather: weatherreducer,
+	dailyhoutly: dailyhoutlyreducer,
 });
 
-const store = createStore(rootReducer, 
-  composeWithDevTools(
-    applyMiddleware(ReduxThunk)
-    )
+const store = createStore(
+	rootReducer,
+	composeWithDevTools(applyMiddleware(ReduxThunk))
 );
 
 const AppWrapper = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+	);
 };
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        await dispatch(weatherActions.fetchCities());
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        await SplashScreen.hideAsync();
-      }
-    }
+	const dispatch = useDispatch();
 
-    prepare();
-  }, [dispatch]);
+	useEffect(() => {
+		async function prepare() {
+			try {
+				await SplashScreen.preventAutoHideAsync();
+				await dispatch(weatherActions.fetchCities());
+				await new Promise((resolve) => setTimeout(resolve, 2000));
+			} catch (e) {
+				console.warn(e);
+			} finally {
+				await SplashScreen.hideAsync();
+			}
+		}
 
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <BottomTabs />
-      </NavigationContainer>
-    </Provider>
-  );
+		prepare();
+	}, [dispatch]);
+
+	return (
+		<Provider store={store}>
+			<NavigationContainer>
+				<BottomTabs />
+			</NavigationContainer>
+		</Provider>
+	);
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
 
 export default AppWrapper;

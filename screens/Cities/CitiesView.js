@@ -13,6 +13,7 @@ import HeaderInput from "../../components/HeaderInput";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
+import PushController from "../../services/PushController";
 
 export default function CitiesScreen({ navigation, ...props }) {
 	const {
@@ -63,7 +64,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 								}}
 							/>
 						)}
-						numColumns={flatListColumns}
+						numColumns={2}
 						refreshing={isRefreshing}
 						onRefresh={() => {
 							pTRHandler();

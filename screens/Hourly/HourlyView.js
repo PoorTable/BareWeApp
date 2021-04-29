@@ -8,13 +8,34 @@ import {
 	Text,
 	View,
 } from "react-native";
+import { BottomSheet, ListItem } from "react-native-elements";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
 
 const HourlyView = (props) => {
-	const { ps, isLoading, pTRHandler, Cities, getPerm, np } = props;
-
+	const {
+		ps,
+		isLoading,
+		pTRHandler,
+		Cities,
+		getPerm,
+		np,
+		downloadFile,
+		openFile,
+		isVisible,
+		setIsVisible,
+	} = props;
+	const List = [
+		{ title: "Download file", onPress: () => downloadFile() },
+		{ title: "View file", onPress: () => openFile() },
+		{
+			title: "Cancel",
+			containerStyle: { backgroundColor: "red" },
+			titleStyle: { color: "white" },
+			onPress: () => setIsVisible(false),
+		},
+	];
 	return (
 		<SafeAreaView style={styles.fl}>
 			<ImageBackground
@@ -43,9 +64,47 @@ const HourlyView = (props) => {
 								pTRHandler();
 							}}
 						/>
+						<BottomSheet
+							isVisible={isVisible}
+							containerStyle={{ backgroundColor: "rgba(0.5, 0.25, 0, 0.2)" }}
+						>
+							{List.map((l, i) => (
+								<ListItem
+									key={i}
+									containerStyle={l.containerStyle}
+									onPress={l.onPress}
+								>
+									<ListItem.Content>
+										<ListItem.Title style={l.titleStyle}>
+											{l.title}
+										</ListItem.Title>
+									</ListItem.Content>
+								</ListItem>
+							))}
+						</BottomSheet>
 					</View>
 				) : !np ? (
-					<NoData onPress={getPerm} />
+					<View>
+						<NoData onPress={getPerm} />
+						<BottomSheet
+							isVisible={isVisible}
+							containerStyle={{ backgroundColor: "rgba(0.5, 0.25, 0, 0.2)" }}
+						>
+							{List.map((l, i) => (
+								<ListItem
+									key={i}
+									containerStyle={l.containerStyle}
+									onPress={l.onPress}
+								>
+									<ListItem.Content>
+										<ListItem.Title style={l.titleStyle}>
+											{l.title}
+										</ListItem.Title>
+									</ListItem.Content>
+								</ListItem>
+							))}
+						</BottomSheet>
+					</View>
 				) : (
 					<View style={styles.container}>
 						<Image source={require("../../assets/NoData.png")} />

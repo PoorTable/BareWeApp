@@ -115,6 +115,13 @@ const HourlyPresenter = ({ navigation }) => {
 		f();
 	}, []);
 
+	const openFile = () => {
+		dispatch(dailyhourlyactions.openFile);
+	};
+	const downloadFile = () => {
+		dispatch(dailyhourlyactions.downloadFile);
+	};
+
 	return (
 		<HourlyView
 			location={location}
@@ -126,6 +133,8 @@ const HourlyPresenter = ({ navigation }) => {
 			Cities1={Cities1}
 			getPerm={getPerm}
 			np={np}
+			downloadFile={downloadFile}
+			openFile={openFile}
 		/>
 	);
 };

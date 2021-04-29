@@ -84,8 +84,8 @@ const HourlyYesterday = ({ navigation }) => {
 				headerTitleAlign: "left",
 				headerRight: () => (
 					<Button
-						onPress={() => dispatch(dailyhourlyactions.openFile())}
-						title="Info"
+						onPress={() => setIsVisible(true)}
+						title="File"
 						color="#ded"
 						style={{ marginVertical: 50 }}
 					/>
@@ -108,6 +108,15 @@ const HourlyYesterday = ({ navigation }) => {
 		f();
 	}, []);
 
+	const [isVisible, setIsVisible] = useState(false);
+
+	const openFile = () => {
+		dispatch(dailyhourlyactions.openFile);
+	};
+	const downloadFile = () => {
+		dispatch(dailyhourlyactions.downloadFile);
+	};
+
 	return (
 		<HourlyView
 			location={location}
@@ -118,6 +127,10 @@ const HourlyYesterday = ({ navigation }) => {
 			Cities={Cities}
 			Cities1={Cities1}
 			getPerm={getPerm}
+			isVisible={isVisible}
+			setIsVisible={setIsVisible}
+			openFile={openFile}
+			downloadFile={downloadFile}
 		/>
 	);
 };

@@ -3,9 +3,12 @@ package com.bareweapp;
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;

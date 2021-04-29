@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485533304264",
+    "project_id": "bareweapp",
+    "storage_bucket": "bareweapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485533304264:android:65275950d676bc251e2cfd",
+        "android_client_info": {
+          "package_name": "com.bareweapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485533304264-cq0j0mvkgus8tcrilm7lb4effu0vqpc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOHSb-UmBI7z4_YU0zdDBTvPHNLG_BGMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485533304264-cq0j0mvkgus8tcrilm7lb4effu0vqpc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
