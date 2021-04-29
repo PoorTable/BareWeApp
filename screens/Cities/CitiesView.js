@@ -7,13 +7,16 @@ import {
 	Image,
 	FlatList,
 	SafeAreaView,
+	Button,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderInput from "../../components/HeaderInput";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
-import PushController from "../../services/PushController";
+
+import * as weatherActions from "../../store/weatheractions";
 
 export default function CitiesScreen({ navigation, ...props }) {
 	const {
@@ -29,6 +32,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 		changeTextHandler,
 		isEmpty,
 	} = props;
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.searchBar}>
@@ -76,6 +80,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 							<Image source={require("../../assets/NoData.png")} />
 							<Text style={styles.text}>No data for {Citiy.id}</Text>
 						</View>
+						<Button title="open" onClick={() => Push} />
 					</View>
 				) : (
 					<View style={styles.container}>
@@ -92,6 +97,12 @@ export default function CitiesScreen({ navigation, ...props }) {
 								wicon={Citiy.wcondition}
 							/>
 						</View>
+						<Button
+							title="open"
+							onClick={() => {
+								dispatch(weatherActions.Push());
+							}}
+						/>
 					</View>
 				)}
 			</ImageBackground>

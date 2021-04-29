@@ -2,6 +2,7 @@ import FileViewer from "react-native-file-viewer";
 import { Platform } from "react-native";
 import City from "../models/City";
 import * as Network from "expo-network";
+import { Notifications } from "react-native-notifications";
 
 export const SET_DH = "SET_DH";
 export const GET_CITY_NAME = "SET_CITY_NAME";
@@ -20,17 +21,29 @@ export const selectDay = (index) => {
 
 export const downloadFile = () => {
 	console.log("s");
-	var RNFS = require("react-native-fs");
+	Notifications.postLocalNotification(
+		{
+			body: "Local notification!",
+			title: "Local Notification Title",
+			sound: "chime.aiff",
+			category: "SOME_CATEGORY",
+			link: "localNotificationLink",
+			fireDate: new Date(),
+		},
+		id
+	);
 
-	var path =
-		Platform.OS.toLowerCase() === "android"
-			? RNFS.DocumentDirectoryPath + "datas.txt"
-			: RNFS.DocumentDirectoryPath + "datas.json";
-	DownloadFileOptions = {
-		fromUrl: path,
-		toFile: RNFS.DownloadDirectoryPath + "datas.txt",
-	};
-	RNFS.downloadFile(DownloadFileOptions);
+	// var RNFS = require("react-native-fs");
+
+	// var path =
+	// 	Platform.OS.toLowerCase() === "android"
+	// 		? RNFS.DocumentDirectoryPath + "datas.txt"
+	// 		: RNFS.DocumentDirectoryPath + "datas.json";
+	// DownloadFileOptions = {
+	// 	fromUrl: path,
+	// 	toFile: RNFS.DownloadDirectoryPath + "datas.txt",
+	// };
+	// RNFS.downloadFile(DownloadFileOptions);
 	return async (dispatch, getState) => {};
 };
 

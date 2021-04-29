@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import moment from "moment";
-import { Alert, Button, Text } from "react-native";
+import { Alert, Button, Platform, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../store/dailyhourlyactions";
 import HourlyView from "./Hourly/HourlyView";
@@ -84,7 +84,11 @@ const HourlyYesterday = ({ navigation }) => {
 				headerTitleAlign: "left",
 				headerRight: () => (
 					<Button
-						onPress={() => setIsVisible(true)}
+						onPress={() =>
+							Platform.OS.toLocaleLowerCase == "android"
+								? setIsVisible(true)
+								: dispatch(dailyhourlyactions.openFile)
+						}
 						title="File"
 						color="#ded"
 						style={{ marginVertical: 50 }}
