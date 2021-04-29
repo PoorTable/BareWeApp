@@ -24,13 +24,13 @@ export const downloadFile = () => {
 
 	var RNFS = require("react-native-fs");
 
-	var path = RNFS.DocumentDirectoryPath + "/datas.txt";
-	let toFile = RNFS.DownloadDirectoryPath + "/datas.txt";
-
+	var path = RNFS.DocumentDirectoryPath + "/datas.json";
+	let toFile = RNFS.DownloadDirectoryPath + "/datas.json";
+	console.log(path);
 	RNFS.copyFile(path, toFile).then(
 		Notifications.postLocalNotification({
-			body: "Local notification!",
-			title: "Local Notification Title",
+			body: "File with yesterday forecast succesfully donwloaded",
+			title: "File Downloaded",
 			sound: "chime.aiff",
 			category: "SOME_CATEGORY",
 			link: "localNotificationLink",
@@ -44,9 +44,10 @@ export const openFile = async () => {
 	var RNFS = require("react-native-fs");
 	var path =
 		Platform.OS.toLowerCase() === "android"
-			? RNFS.DocumentDirectoryPath + "/datas.txt"
+			? RNFS.DocumentDirectoryPath + "/datas.json"
 			: RNFS.DocumentDirectoryPath + "/datas.json";
 	let exists = await RNFS.exists(path);
+	console.log(path);
 	if (exists) {
 		FileViewer.open(path, {
 			showOpenWithDialog: true,
@@ -64,9 +65,10 @@ export const getYesterday = (lat, lon) => {
 		var RNFS = require("react-native-fs");
 		var path =
 			Platform.OS.toLowerCase() === "android"
-				? RNFS.DocumentDirectoryPath + "/datas.txt"
+				? RNFS.DocumentDirectoryPath + "/datas.json"
 				: RNFS.DocumentDirectoryPath + "/datas.json";
 		let exists = await RNFS.exists(path);
+		console.log(path);
 		if (exists) {
 			let a = await RNFS.readFile(path);
 			let JSONFormatted = JSON.parse(a);

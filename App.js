@@ -48,7 +48,7 @@ const App = () => {
 
 	Notifications.events().registerNotificationOpened((notification) => {
 		console.log(`Notification opened: ${notification.payload}`);
-		completion();
+		completion({ alert: false, sound: false, badge: false });
 	});
 	useEffect(() => {
 		async function prepare() {
