@@ -80,7 +80,6 @@ export default function CitiesScreen({ navigation, ...props }) {
 							<Image source={require("../../assets/NoData.png")} />
 							<Text style={styles.text}>No data for {Citiy.id}</Text>
 						</View>
-						<Button title="open" onClick={() => Push} />
 					</View>
 				) : (
 					<View style={styles.container}>
@@ -97,12 +96,6 @@ export default function CitiesScreen({ navigation, ...props }) {
 								wicon={Citiy.wcondition}
 							/>
 						</View>
-						<Button
-							title="open"
-							onClick={() => {
-								dispatch(weatherActions.Push());
-							}}
-						/>
 					</View>
 				)}
 			</ImageBackground>

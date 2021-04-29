@@ -21,29 +21,22 @@ export const selectDay = (index) => {
 
 export const downloadFile = () => {
 	console.log("s");
-	Notifications.postLocalNotification(
-		{
+
+	var RNFS = require("react-native-fs");
+
+	var path = RNFS.DocumentDirectoryPath + "/datas.txt";
+	let toFile = RNFS.DownloadDirectoryPath + "/datas.txt";
+
+	RNFS.copyFile(path, toFile).then(
+		Notifications.postLocalNotification({
 			body: "Local notification!",
 			title: "Local Notification Title",
 			sound: "chime.aiff",
 			category: "SOME_CATEGORY",
 			link: "localNotificationLink",
 			fireDate: new Date(),
-		},
-		id
+		})
 	);
-
-	// var RNFS = require("react-native-fs");
-
-	// var path =
-	// 	Platform.OS.toLowerCase() === "android"
-	// 		? RNFS.DocumentDirectoryPath + "datas.txt"
-	// 		: RNFS.DocumentDirectoryPath + "datas.json";
-	// DownloadFileOptions = {
-	// 	fromUrl: path,
-	// 	toFile: RNFS.DownloadDirectoryPath + "datas.txt",
-	// };
-	// RNFS.downloadFile(DownloadFileOptions);
 	return async (dispatch, getState) => {};
 };
 
@@ -51,8 +44,8 @@ export const openFile = async () => {
 	var RNFS = require("react-native-fs");
 	var path =
 		Platform.OS.toLowerCase() === "android"
-			? RNFS.DocumentDirectoryPath + "datas.txt"
-			: RNFS.DocumentDirectoryPath + "datas.json";
+			? RNFS.DocumentDirectoryPath + "/datas.txt"
+			: RNFS.DocumentDirectoryPath + "/datas.json";
 	let exists = await RNFS.exists(path);
 	if (exists) {
 		FileViewer.open(path, {
@@ -71,8 +64,8 @@ export const getYesterday = (lat, lon) => {
 		var RNFS = require("react-native-fs");
 		var path =
 			Platform.OS.toLowerCase() === "android"
-				? RNFS.DocumentDirectoryPath + "datas.txt"
-				: RNFS.DocumentDirectoryPath + "datas.json";
+				? RNFS.DocumentDirectoryPath + "/datas.txt"
+				: RNFS.DocumentDirectoryPath + "/datas.json";
 		let exists = await RNFS.exists(path);
 		if (exists) {
 			let a = await RNFS.readFile(path);

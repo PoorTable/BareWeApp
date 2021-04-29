@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import * as SplashScreen from "expo-splash-screen";
-import Notifications from "react-native-notifications";
+import { Notifications } from "react-native-notifications";
 
 import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";

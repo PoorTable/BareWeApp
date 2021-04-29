@@ -85,7 +85,7 @@ const HourlyYesterday = ({ navigation }) => {
 				headerRight: () => (
 					<Button
 						onPress={() =>
-							Platform.OS.toLocaleLowerCase == "android"
+							Platform.OS.toLocaleLowerCase() == "android"
 								? setIsVisible(true)
 								: dispatch(dailyhourlyactions.openFile)
 						}
