@@ -52,7 +52,16 @@ export const openFile = async () => {
 		FileViewer.open(path, {
 			showOpenWithDialog: true,
 			showAppsSuggestions: true,
-		});
+		}).then(
+			Notifications.postLocalNotification({
+				body: "File with yesterday forecast succesfully donwloaded",
+				title: "File Downloaded",
+				sound: "chime.aiff",
+				category: "SOME_CATEGORY",
+				link: "localNotificationLink",
+				fireDate: new Date(),
+			})
+		);
 	}
 	return async (dispatch, getState) => {};
 };
