@@ -13,6 +13,7 @@ import { Notifications } from "react-native-notifications";
 import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";
 import * as weatherActions from "./store/weatheractions";
+import * as dailyhourlyactions from "./store/dailyhourlyactions";
 
 const rootReducer = combineReducers({
 	weather: weatherreducer,
@@ -48,7 +49,7 @@ const App = () => {
 
 	Notifications.events().registerNotificationOpened((notification) => {
 		console.log(`Notification opened: ${notification.payload}`);
-		completion({ alert: false, sound: false, badge: false });
+		completion(dispatch(dailyhourlyactions.openFile()));
 	});
 	useEffect(() => {
 		async function prepare() {

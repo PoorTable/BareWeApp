@@ -145,6 +145,23 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    flavorDimensions "default"
+
+     productFlavors {
+        dev {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.bareweapp"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.bareweapp"
+        }
+        beta {
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.bareweapp"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.bareweapp"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
