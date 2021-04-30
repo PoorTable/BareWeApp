@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet, Alert, Platform } from "react-native";
 import { BottomTabs } from "./navigation/WeatherNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -39,18 +39,24 @@ const App = () => {
 	Notifications.registerRemoteNotifications();
 
 	Notifications.events().registerNotificationReceivedForeground(
-		(notification) => {
+		(notification, completion) => {
+			completion({ alert: true, sound: true, badge: false });
 			console.log(
 				`Notification received in foreground: ${notification.title} : ${notification.body}`
 			);
-			completion({ alert: false, sound: false, badge: false });
 		}
 	);
 
-	Notifications.events().registerNotificationOpened((notification) => {
-		console.log(`Notification opened: ${notification.payload}`);
-		completion(dispatch(dailyhourlyactions.openFile()));
-	});
+	Notifications.events().registerNotificationOpened(
+		(notification, completion) => {
+			completion(
+				Platform.OS.toLowerCase() == "ios"
+					? null
+					: dispatch(dailyhourlyactions.openFile())
+			);
+			console.log(`Notification opened: ${notification.payload}`);
+		}
+	);
 	useEffect(() => {
 		async function prepare() {
 			try {

@@ -52,9 +52,6 @@ export const openFile = async () => {
 		FileViewer.open(path, {
 			showOpenWithDialog: true,
 			showAppsSuggestions: true,
-		}).then(() => {
-			console.log("succesfully opened");
-			console.log(path);
 		});
 	}
 	return async (dispatch, getState) => {};
