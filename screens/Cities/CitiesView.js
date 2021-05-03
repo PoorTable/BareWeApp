@@ -15,6 +15,7 @@ import HeaderInput from "../../components/HeaderInput";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
+import Config from "react-native-config";
 
 import * as weatherActions from "../../store/weatheractions";
 
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: "Roboto-LightItalic",
 		fontWeight: "bold",
-		color: "black",
+		color: Config.PRIMARY_COLOR,
 	},
 	sr: {
 		marginVertical: 10,
