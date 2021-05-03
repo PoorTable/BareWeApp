@@ -20,6 +20,7 @@ import HourlyYesterday from "../screens/HourlyYesterday";
 import SelectedCityScreen, {
 	screenOptions as SelectedCityScreenOptions,
 } from "../screens/SelectedCityScreen";
+import { IsPlatformIOS } from "../services/PlatformController";
 
 const WeatherStack = createStackNavigator();
 
@@ -32,10 +33,9 @@ export const WS = () => {
 					horizontal: 200,
 				},
 				gestureDirection: "vertical-inverted",
-				cardStyleInterpolator:
-					Platform.OS === "Android"
-						? CardStyleInterpolators.forFadeFromBottomAndroid
-						: CardStyleInterpolators.forVerticalIOS,
+				cardStyleInterpolator: !IsPlatformIOS
+					? CardStyleInterpolators.forFadeFromBottomAndroid
+					: CardStyleInterpolators.forVerticalIOS,
 			}}
 		>
 			<WeatherStack.Screen
@@ -62,10 +62,9 @@ export const DailyStack = () => {
 					horizontal: 200,
 				},
 				gestureDirection: "vertical-inverted",
-				cardStyleInterpolator:
-					Platform.OS === "Android"
-						? CardStyleInterpolators.forFadeFromBottomAndroid
-						: CardStyleInterpolators.forVerticalIOS,
+				cardStyleInterpolator: !IsPlatformIOS
+					? CardStyleInterpolators.forFadeFromBottomAndroid
+					: CardStyleInterpolators.forVerticalIOS,
 			}}
 		>
 			<DS.Screen

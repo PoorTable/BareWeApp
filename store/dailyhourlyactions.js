@@ -3,6 +3,7 @@ import { Platform } from "react-native";
 import City from "../models/City";
 import * as Network from "expo-network";
 import { Notifications } from "react-native-notifications";
+import { IsPlatformIOS } from "../services/PlatformController";
 
 export const SET_DH = "SET_DH";
 export const GET_CITY_NAME = "SET_CITY_NAME";
@@ -42,10 +43,9 @@ export const downloadFile = () => {
 
 export const openFile = async () => {
 	var RNFS = require("react-native-fs");
-	var path =
-		Platform.OS.toLowerCase() === "android"
-			? RNFS.DocumentDirectoryPath + "/datas.json"
-			: RNFS.DocumentDirectoryPath + "/datas.json";
+	var path = !IsPlatformIOS
+		? RNFS.DocumentDirectoryPath + "/datas.json"
+		: RNFS.DocumentDirectoryPath + "/datas.json";
 	let exists = await RNFS.exists(path);
 	console.log(path);
 	if (exists) {
@@ -69,10 +69,9 @@ export const openFile = async () => {
 export const getYesterday = (lat, lon) => {
 	return async (dispatch, getState) => {
 		var RNFS = require("react-native-fs");
-		var path =
-			Platform.OS.toLowerCase() === "android"
-				? RNFS.DocumentDirectoryPath + "/datas.json"
-				: RNFS.DocumentDirectoryPath + "/datas.json";
+		var path = !IsPlatformIOS
+			? RNFS.DocumentDirectoryPath + "/datas.json"
+			: RNFS.DocumentDirectoryPath + "/datas.json";
 		let exists = await RNFS.exists(path);
 		console.log(path);
 		if (exists) {
