@@ -30,7 +30,7 @@ export default class PushController extends Component {
 				sound: true,
 			},
 			popInitialNotification: true,
-			requestPermissions: Platform.OS === "ios",
+			requestPermissions: IsPlatformIOS,
 		});
 	}
 

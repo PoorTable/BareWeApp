@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import * as SplashScreen from "expo-splash-screen";
 import { Notifications } from "react-native-notifications";
+import { DeterminatePlatform } from "./services/PlatformController";
 
 import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";
@@ -50,9 +51,7 @@ const App = () => {
 	Notifications.events().registerNotificationOpened(
 		(notification, completion) => {
 			completion(
-				Platform.OS.toLowerCase() == "ios"
-					? null
-					: dispatch(dailyhourlyactions.openFile())
+				IsPlatformIOS ? null : dispatch(dailyhourlyactions.openFile())
 			);
 			console.log(`Notification opened: ${notification.payload}`);
 		}
@@ -62,7 +61,7 @@ const App = () => {
 			try {
 				await SplashScreen.preventAutoHideAsync();
 				await dispatch(weatherActions.fetchCities());
-
+				DeterminatePlatform();
 				await new Promise((resolve) => setTimeout(resolve, 2000));
 			} catch (e) {
 				console.warn(e);

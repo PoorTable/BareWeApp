@@ -6,6 +6,7 @@ import { Alert, Button, Platform, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../store/dailyhourlyactions";
 import HourlyView from "./Hourly/HourlyView";
+import { IsPlatformIOS } from "../services/PlatformController";
 
 const HourlyYesterday = ({ navigation }) => {
 	const [location, setLocation] = useState(null);
@@ -85,7 +86,7 @@ const HourlyYesterday = ({ navigation }) => {
 				headerRight: () => (
 					<Button
 						onPress={() =>
-							Platform.OS.toLocaleLowerCase() == "android"
+							!IsPlatformIOS
 								? setIsVisible(true)
 								: dispatch(dailyhourlyactions.openFile)
 						}
