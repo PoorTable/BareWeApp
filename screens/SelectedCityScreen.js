@@ -2,6 +2,7 @@ import { Fontisto } from "@expo/vector-icons";
 import moment from "moment";
 import React from "react";
 import { ImageBackground, SafeAreaView, StyleSheet, Text } from "react-native";
+import Config from "react-native-config";
 
 const SelectedCityScreen = (props) => {
 	let x = new Date();
@@ -26,8 +27,7 @@ const SelectedCityScreen = (props) => {
 		<SafeAreaView style={styles.container}>
 			<ImageBackground
 				source={{
-					uri:
-						"https://t4.ftcdn.net/jpg/03/25/68/63/360_F_325686385_7xPlV6ZN5HMj15QJ9LRr8gOsk2nyP4pM.jpg",
+					uri: Config.BACKGROUND,
 				}}
 				style={styles.container}
 			>

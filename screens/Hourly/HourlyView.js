@@ -12,6 +12,7 @@ import { BottomSheet, ListItem } from "react-native-elements";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
+import Config from "react-native-config";
 
 const HourlyView = (props) => {
 	const {
@@ -40,8 +41,7 @@ const HourlyView = (props) => {
 		<SafeAreaView style={styles.fl}>
 			<ImageBackground
 				source={{
-					uri:
-						"https://t4.ftcdn.net/jpg/03/25/68/63/360_F_325686385_7xPlV6ZN5HMj15QJ9LRr8gOsk2nyP4pM.jpg",
+					uri: Config.BACKGROUND,
 				}}
 				style={{ flex: 1 }}
 			>

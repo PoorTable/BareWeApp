@@ -48,8 +48,7 @@ export default function CitiesScreen({ navigation, ...props }) {
 			</View>
 			<ImageBackground
 				source={{
-					uri:
-						"https://t4.ftcdn.net/jpg/03/25/68/63/360_F_325686385_7xPlV6ZN5HMj15QJ9LRr8gOsk2nyP4pM.jpg",
+					uri: Config.BACKGROUND,
 				}}
 				style={{ flex: 1 }}
 			>
