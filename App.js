@@ -40,8 +40,6 @@ const AppWrapper = () => {
 const App = () => {
 	const dispatch = useDispatch();
 
-	Notifications.registerRemoteNotifications();
-
 	Notifications.events().registerNotificationReceivedForeground(
 		(notification, completion) => {
 			completion({ alert: true, sound: true, badge: false });
@@ -71,11 +69,13 @@ const App = () => {
 			console.log(`Notification opened: ${notification.payload}`);
 		}
 	);
+
 	useEffect(() => {
 		async function prepare() {
 			try {
 				await SplashScreen.preventAutoHideAsync();
 				await dispatch(weatherActions.fetchCities());
+				Notifications.registerRemoteNotifications();
 				DeterminatePlatform();
 				await new Promise((resolve) => setTimeout(resolve, 2000));
 			} catch (e) {

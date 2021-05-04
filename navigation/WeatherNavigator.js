@@ -79,7 +79,7 @@ export const DailyStack = () => {
 const HourlyTT = createMaterialTopTabNavigator();
 export const HourlyTopTab = () => {
 	return (
-		<HourlyTT.Navigator initialRouteName="Today">
+		<HourlyTT.Navigator initialRouteName="Yseterday">
 			<HourlyTT.Screen name="Yseterday" component={HourlyYesterday} />
 			<HourlyTT.Screen name="Today" component={HourlyPresenter} />
 		</HourlyTT.Navigator>
