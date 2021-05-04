@@ -80,7 +80,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     enableHermes: false
 ]
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
@@ -223,6 +223,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':react-native-config')
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Alert, Platform } from "react-native";
+import { StyleSheet, Alert, Platform, Linking } from "react-native";
 import { BottomTabs } from "./navigation/WeatherNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -9,7 +9,10 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import * as SplashScreen from "expo-splash-screen";
 import { Notifications } from "react-native-notifications";
-import { DeterminatePlatform } from "./services/PlatformController";
+import {
+	DeterminatePlatform,
+	IsPlatformIOS,
+} from "./services/PlatformController";
 
 import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";
@@ -51,8 +54,20 @@ const App = () => {
 	Notifications.events().registerNotificationOpened(
 		(notification, completion) => {
 			completion(
-				IsPlatformIOS ? null : dispatch(dailyhourlyactions.openFile())
+				() => {
+					if (IsPlatformIOS()) {
+						Linking.openURL("calshow:");
+					} else {
+						Linking.openURL("content://com.android.calendar/time/");
+					}
+				}
+				// IsPlatformIOS() ? null : dispatch(dailyhourlyactions.openFile())
 			);
+			if (IsPlatformIOS()) {
+				Linking.openURL("calshow:");
+			} else {
+				Linking.openURL("content://com.android.calendar/time/");
+			}
 			console.log(`Notification opened: ${notification.payload}`);
 		}
 	);

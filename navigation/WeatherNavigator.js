@@ -33,7 +33,7 @@ export const WS = () => {
 					horizontal: 200,
 				},
 				gestureDirection: "vertical-inverted",
-				cardStyleInterpolator: !IsPlatformIOS
+				cardStyleInterpolator: !IsPlatformIOS()
 					? CardStyleInterpolators.forFadeFromBottomAndroid
 					: CardStyleInterpolators.forVerticalIOS,
 			}}
@@ -62,7 +62,7 @@ export const DailyStack = () => {
 					horizontal: 200,
 				},
 				gestureDirection: "vertical-inverted",
-				cardStyleInterpolator: !IsPlatformIOS
+				cardStyleInterpolator: !IsPlatformIOS()
 					? CardStyleInterpolators.forFadeFromBottomAndroid
 					: CardStyleInterpolators.forVerticalIOS,
 			}}
@@ -88,7 +88,7 @@ export const HourlyTopTab = () => {
 
 const HS = createStackNavigator();
 export const HourlyStack = () => {
-	const tit = useSelector((state) => state.dailyhoutly.City);
+	const tit = useSelector((state) => state.dailyhoutly.City.name);
 	const City = useSelector((state) => state.dailyhoutly.dt);
 	const date = moment(City).format("MMMM, Do");
 	return (
@@ -97,7 +97,7 @@ export const HourlyStack = () => {
 				name="Hourly"
 				component={HourlyTopTab}
 				options={{
-					title: tit.name + " " + date,
+					title: tit + " - " + date,
 					headerTitleAlign: "left",
 				}}
 			/>

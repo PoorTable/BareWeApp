@@ -13,6 +13,7 @@ const HourlyYesterday = ({ navigation }) => {
 	const [ps, setPs] = useState(false);
 	const [isLoading, setisLoading] = useState(false);
 	const dispatch = useDispatch();
+	const tit = useSelector((state) => state.dailyhoutly.City.name);
 	const Cities = useSelector((state) => state.dailyhoutly.Yesterday);
 	var Cities1 = Cities;
 	const getPerm = async () => {
@@ -58,6 +59,7 @@ const HourlyYesterday = ({ navigation }) => {
 					loca.coords.longitude
 				)
 			);
+
 			await dispatch(
 				dailyhourlyactions.getYesterday(
 					loca.coords.latitude,
@@ -75,18 +77,17 @@ const HourlyYesterday = ({ navigation }) => {
 		}
 	};
 
-	const tit = useSelector((state) => state.dailyhoutly.City.name);
 	const date = moment(Date.now() - 86400000).format("MMMM, Do");
-
 	useEffect(() => {
 		const unsubscribe = navigation.addListener("focus", () => {
+			dispatch(dailyhourlyactions.SetDate(1));
 			navigation.dangerouslyGetParent().setOptions({
-				headerTitle: tit + " - " + date,
-				headerTitleAlign: "left",
+				// headerTitle: tit + " - " + date,
+				// headerTitleAlign: "left",
 				headerRight: () => (
 					<Button
 						onPress={() =>
-							!IsPlatformIOS
+							!IsPlatformIOS()
 								? setIsVisible(true)
 								: dispatch(dailyhourlyactions.openFile)
 						}
@@ -108,7 +109,7 @@ const HourlyYesterday = ({ navigation }) => {
 	useEffect(() => {
 		let f = async () => {
 			await getPermStatus();
-			getLoc();
+			await getLoc();
 		};
 		f();
 	}, []);

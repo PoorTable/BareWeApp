@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Platform } from "react-native";
 
-const IsIOS = false;
+var IsIOS = false;
 
 export function DeterminatePlatform() {
-	Platform.OS.toLowerCase = "ios" ? (IsIOS = true) : (IsIOS = false);
+	Platform.OS.toLowerCase() === "ios" ? (IsIOS = true) : (IsIOS = false);
+	console.log(IsIOS);
 }
 
 export function IsPlatformIOS() {
-	return isIOS;
+	return IsIOS;
 }

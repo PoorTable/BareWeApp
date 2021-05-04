@@ -43,7 +43,7 @@ export const downloadFile = () => {
 
 export const openFile = async () => {
 	var RNFS = require("react-native-fs");
-	var path = !IsPlatformIOS
+	var path = !IsPlatformIOS()
 		? RNFS.DocumentDirectoryPath + "/datas.json"
 		: RNFS.DocumentDirectoryPath + "/datas.json";
 	let exists = await RNFS.exists(path);
@@ -69,7 +69,7 @@ export const openFile = async () => {
 export const getYesterday = (lat, lon) => {
 	return async (dispatch, getState) => {
 		var RNFS = require("react-native-fs");
-		var path = !IsPlatformIOS
+		var path = !IsPlatformIOS()
 			? RNFS.DocumentDirectoryPath + "/datas.json"
 			: RNFS.DocumentDirectoryPath + "/datas.json";
 		let exists = await RNFS.exists(path);
@@ -205,6 +205,13 @@ export const getCityName = (lat, lon) => {
 		console.log(loadedCity);
 		dispatch({ type: SET_DATE, dt: dt });
 		dispatch({ type: GET_CITY_NAME, City: loadedCity });
+	};
+};
+
+export const SetDate = (ind) => {
+	return async (dispatch, getState) => {
+		let dt = ind === 1 ? Date.now() - 86400000 : Date.now();
+		dispatch({ type: SET_DATE, dt: dt });
 	};
 };
 
