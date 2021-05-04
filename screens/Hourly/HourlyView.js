@@ -7,6 +7,7 @@ import {
 	ImageBackground,
 	Text,
 	View,
+	Vibration,
 } from "react-native";
 import { BottomSheet, ListItem } from "react-native-elements";
 import CityLine from "../../components/CityLine";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Alert, Platform, Linking } from "react-native";
+import { StyleSheet, Alert, Platform, Linking, Vibration } from "react-native";
 import { BottomTabs } from "./navigation/WeatherNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -43,6 +43,7 @@ const App = () => {
 	Notifications.events().registerNotificationReceivedForeground(
 		(notification, completion) => {
 			completion({ alert: true, sound: true, badge: false });
+			Vibration.vibrate(40000);
 			console.log(
 				`Notification received in foreground: ${notification.title} : ${notification.body}`
 			);
@@ -53,6 +54,7 @@ const App = () => {
 		(notification, completion) => {
 			completion(
 				() => {
+					Vibration.vibrate(10000);
 					if (IsPlatformIOS()) {
 						Linking.openURL("calshow:");
 					} else {
@@ -61,11 +63,13 @@ const App = () => {
 				}
 				// IsPlatformIOS() ? null : dispatch(dailyhourlyactions.openFile())
 			);
+			Vibration.vibrate(10000);
 			if (IsPlatformIOS()) {
 				Linking.openURL("calshow:");
 			} else {
 				Linking.openURL("content://com.android.calendar/time/");
 			}
+
 			console.log(`Notification opened: ${notification.payload}`);
 		}
 	);

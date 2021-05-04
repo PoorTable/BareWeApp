@@ -114,6 +114,9 @@ export const BottomTabs = () => {
 			inactiveColor="#3e2465"
 			barStyle={{ backgroundColor: "#694fad" }}
 			labelStyle={{ fontSize: 12 }}
+			screenOptions={{
+				unmountOnBlur: true,
+			}}
 		>
 			<BottomTab.Screen
 				name="Cities"
