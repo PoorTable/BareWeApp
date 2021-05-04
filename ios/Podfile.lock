@@ -19,6 +19,10 @@ PODS:
     - React-Core
     - UMCore
     - UMImageLoaderInterface
+  - EXImagePicker (10.1.4):
+    - UMCore
+    - UMFileSystemInterface
+    - UMPermissionsInterface
   - EXKeepAwake (9.1.2):
     - UMCore
   - EXLocation (12.0.4):
@@ -275,6 +279,8 @@ PODS:
     - react-native-config/App (= 1.4.2)
   - react-native-config/App (1.4.2):
     - React-Core
+  - react-native-image-picker (3.5.0):
+    - React-Core
   - react-native-notifications (3.4.2):
     - React-Core
   - react-native-safe-area-context (3.2.0):
@@ -414,6 +420,7 @@ DEPENDENCIES:
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
+  - EXImagePicker (from `../node_modules/expo-image-picker/ios`)
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
   - EXNetwork (from `../node_modules/expo-network/ios`)
@@ -457,6 +464,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -521,6 +529,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-font/ios"
   EXImageLoader:
     :path: "../node_modules/expo-image-loader/ios"
+  EXImagePicker:
+    :path: "../node_modules/expo-image-picker/ios"
   EXKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   EXLocation:
@@ -565,6 +575,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-notifications:
     :path: "../node_modules/react-native-notifications"
   react-native-safe-area-context:
@@ -642,6 +654,7 @@ SPEC CHECKSUMS:
   EXFileSystem: dcf2273f49431e5037347c733a2dc5d08e0d0a9e
   EXFont: d6fb79f9863120f0d0b26b0c2d1453bc9511e9df
   EXImageLoader: da941c9399e01ec28f2d5b270bdd21f2c8ca596c
+  EXImagePicker: dd05b8a5cb782c79d07d1d72e5850c6acc2b9a37
   EXKeepAwake: d4e4a3ed8c1c4fd940dd62fc5a8be2a190371fd4
   EXLocation: 65d4250e06ae1c59a3b4aa5d93aa36b0eed8ad7b
   EXNetwork: 36144f5e572e6b6b218094c66a57c99e07ffbc0d
@@ -673,6 +686,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-config: c98128a72bc2c3a1ca72caec0b021f0fa944aa29
+  react-native-image-picker: 05eefd9232123c5ebde7979c3eefb890b57a87ff
   react-native-notifications: 51ed8167f70f01c5000ba81a4465ea98b4612e23
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336

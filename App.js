@@ -16,12 +16,14 @@ import {
 
 import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";
+import photoreducer from "./store/photoreducer";
 import * as weatherActions from "./store/weatheractions";
 import * as dailyhourlyactions from "./store/dailyhourlyactions";
 
 const rootReducer = combineReducers({
 	weather: weatherreducer,
 	dailyhoutly: dailyhoutlyreducer,
+	photo: photoreducer,
 });
 
 const store = createStore(
@@ -43,7 +45,6 @@ const App = () => {
 	Notifications.events().registerNotificationReceivedForeground(
 		(notification, completion) => {
 			completion({ alert: true, sound: true, badge: false });
-			Vibration.vibrate(40000);
 			console.log(
 				`Notification received in foreground: ${notification.title} : ${notification.body}`
 			);
@@ -54,7 +55,6 @@ const App = () => {
 		(notification, completion) => {
 			completion(
 				() => {
-					Vibration.vibrate(10000);
 					if (IsPlatformIOS()) {
 						Linking.openURL("calshow:");
 					} else {
@@ -63,7 +63,6 @@ const App = () => {
 				}
 				// IsPlatformIOS() ? null : dispatch(dailyhourlyactions.openFile())
 			);
-			Vibration.vibrate(10000);
 			if (IsPlatformIOS()) {
 				Linking.openURL("calshow:");
 			} else {

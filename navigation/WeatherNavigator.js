@@ -21,6 +21,8 @@ import SelectedCityScreen, {
 	screenOptions as SelectedCityScreenOptions,
 } from "../screens/SelectedCityScreen";
 import { IsPlatformIOS } from "../services/PlatformController";
+import PhotoPresenter from "../screens/Photo/PhotoPresenter";
+import { TouchableOpacity, Text } from "react-native";
 
 const WeatherStack = createStackNavigator();
 
@@ -43,6 +45,7 @@ export const WS = () => {
 				component={CitiesPresenter}
 				options={CitiesScreenOptions}
 			/>
+
 			<WeatherStack.Screen
 				name="SelectedCity"
 				component={SelectedCityScreen}
@@ -72,6 +75,7 @@ export const DailyStack = () => {
 				component={DailyPresenter}
 				options={DailyScreenOptions}
 			/>
+			<DS.Screen name="Photo" component={PhotoPresenter} />
 		</DS.Navigator>
 	);
 };
@@ -79,7 +83,7 @@ export const DailyStack = () => {
 const HourlyTT = createMaterialTopTabNavigator();
 export const HourlyTopTab = () => {
 	return (
-		<HourlyTT.Navigator initialRouteName="Yseterday">
+		<HourlyTT.Navigator initialRouteName="Today">
 			<HourlyTT.Screen name="Yseterday" component={HourlyYesterday} />
 			<HourlyTT.Screen name="Today" component={HourlyPresenter} />
 		</HourlyTT.Navigator>
@@ -127,6 +131,9 @@ export const BottomTabs = () => {
 						<AntDesign name="home" size={26} color={color} />
 					),
 				}}
+				screenOptions={{
+					unmountOnBlur: true,
+				}}
 			/>
 			<BottomTab.Screen
 				name="Daily"
@@ -137,6 +144,9 @@ export const BottomTabs = () => {
 						<AntDesign name="calendar" size={26} color={color} />
 					),
 				}}
+				screenOptions={{
+					unmountOnBlur: true,
+				}}
 			/>
 			<BottomTab.Screen
 				name="Hourly"
@@ -146,6 +156,9 @@ export const BottomTabs = () => {
 					tabBarIcon: ({ color }) => (
 						<Ionicons name="md-time-outline" size={26} color={color} />
 					),
+				}}
+				screenOptions={{
+					unmountOnBlur: true,
 				}}
 			/>
 		</BottomTab.Navigator>

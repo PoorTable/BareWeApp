@@ -2,9 +2,12 @@ import React from "react";
 import {
 	SafeAreaView,
 	StyleSheet,
+	TouchableOpacity,
+	Text,
 	View,
 	ImageBackground,
 	FlatList,
+	Touchable,
 } from "react-native";
 import moment from "moment";
 import Config from "react-native-config";
@@ -14,7 +17,7 @@ import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
 
 const DailyView = (props) => {
-	const { ps, isLoading, pTRHandler, Cities, getPerm } = props;
+	const { ps, isLoading, pTRHandler, Cities, getPerm, PhotoHandler } = props;
 	return (
 		<SafeAreaView style={styles.fl}>
 			<ImageBackground
@@ -46,9 +49,18 @@ const DailyView = (props) => {
 								}}
 							/>
 						</View>
+						<TouchableOpacity onPress={PhotoHandler}>
+							<Text>Go to Photos</Text>
+						</TouchableOpacity>
 					</View>
 				) : (
-					<NoData onPress={getPerm} />
+					<View>
+						<NoData onPress={getPerm} />
+
+						<TouchableOpacity onPress={PhotoHandler}>
+							<Text>Go to Photos</Text>
+						</TouchableOpacity>
+					</View>
 				)}
 			</ImageBackground>
 		</SafeAreaView>
