@@ -1,24 +1,22 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Alert, Platform, Linking, Vibration } from "react-native";
-import { BottomTabs } from "./navigation/WeatherNavigator";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { useDispatch } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from "react-redux";
-import ReduxThunk from "redux-thunk";
 import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect, useState } from "react";
+import { Linking, StyleSheet, Text, View, Vibration } from "react-native";
 import { Notifications } from "react-native-notifications";
+import UserInactivity from "react-native-user-inactivity";
+import { Provider, useDispatch } from "react-redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import ReduxThunk from "redux-thunk";
+import { BottomTabs } from "./navigation/WeatherNavigator";
 import {
 	DeterminatePlatform,
 	IsPlatformIOS,
 } from "./services/PlatformController";
-
-import weatherreducer from "./store/weatherreducer";
 import dailyhoutlyreducer from "./store/dailyhourlyreducer";
 import photoreducer from "./store/photoreducer";
 import * as weatherActions from "./store/weatheractions";
-import * as dailyhourlyactions from "./store/dailyhourlyactions";
+import weatherreducer from "./store/weatherreducer";
 
 const rootReducer = combineReducers({
 	weather: weatherreducer,
@@ -91,11 +89,31 @@ const App = () => {
 		prepare();
 	}, [dispatch]);
 
+	const [active, setActive] = useState(true);
+	const [timer, setTimer] = useState(60000);
 	return (
 		<Provider store={store}>
-			<NavigationContainer>
-				<BottomTabs />
-			</NavigationContainer>
+			{active ? (
+				<UserInactivity
+					isActive={active}
+					timeForInactivity={timer}
+					onAction={(isActive) => {
+						setActive(isActive);
+						console.log("s");
+					}}
+					skipKeyboard={false}
+					style={{ flex: 1 }}
+				>
+					<NavigationContainer>
+						<BottomTabs />
+					</NavigationContainer>
+				</UserInactivity>
+			) : (
+				<View style={styles.container1}>
+					<Text>You have been innactive for 60 seconds</Text>
+					<Text>Please restart the app</Text>
+				</View>
+			)}
 		</Provider>
 	);
 };
@@ -104,6 +122,12 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	container1: {
+		flex: 1,
+		backgroundColor: "#fff000",
 		alignItems: "center",
 		justifyContent: "center",
 	},
