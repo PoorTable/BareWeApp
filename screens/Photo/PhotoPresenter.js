@@ -3,9 +3,13 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import PhotoView from "./PhotoView";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import * as photoactions from "../../store/photoactions";
+import { useSelector, useDispatch } from "react-redux";
 
 const PhotoPresenter = (props) => {
-	const [fileuri, setFileuri] = useState("");
+	const fileuri = useSelector((state) => state.photo.photoURI);
+	const [isVisible, setIsVisible] = useState(false);
+	const dispatch = useDispatch();
 	useEffect(() => {
 		(async () => {
 			if (Platform.OS !== "web") {
@@ -18,16 +22,35 @@ const PhotoPresenter = (props) => {
 					alert("Sorry, we need camera roll permissions to make this work!");
 				}
 			}
+			var RNFS = require("react-native-fs");
+			let path = RNFS.DocumentDirectoryPath + "/phot2.png";
+			let exists = await RNFS.exists(path);
+			console.log(exists);
+			if (exists) {
+				dispatch(photoactions.setPhotoUri("file://" + path));
+			} else {
+				dispatch(photoactions.setPhotoUri(""));
+			}
 		})();
 	}, []);
 
 	const SavePhoto = async (Response) => {
-		var RNFS = require("react-native-fs");
-		var path = Response.uri;
-		let toFile = RNFS.DocumentDirectoryPath + "/photo.png";
-		console.log(path);
-		console.log(toFile);
-		RNFS.copyFile(path, toFile).then(setFileuri(toFile));
+		if (Response.didCancel) {
+		} else {
+			var RNFS = require("react-native-fs");
+			let path = Response.uri;
+			let toFile = RNFS.DocumentDirectoryPath + "/phot2.png";
+			dispatch(photoactions.setPhotoUri(path));
+			console.log(path);
+			console.log(toFile);
+			let exists = await RNFS.exists(toFile);
+			console.log(exists);
+			if (exists) {
+				await RNFS.unlink(toFile).then(await RNFS.copyFile(path, toFile));
+			} else {
+				RNFS.copyFile(path, toFile);
+			}
+		}
 	};
 
 	const TakePhoto = async (Response) => {
@@ -36,10 +59,25 @@ const PhotoPresenter = (props) => {
 			quality: 1,
 			cameraType: "front",
 		};
-		launchCamera("photo", SavePhoto);
+		launchCamera(options, SavePhoto);
 	};
 
-	return <PhotoView TakePhoto={TakePhoto} fileuri={fileuri} />;
+	const TakeFromGallery = async () => {
+		let options = {
+			mediaType: "photo",
+		};
+		launchImageLibrary(options, SavePhoto);
+	};
+
+	return (
+		<PhotoView
+			TakePhoto={TakePhoto}
+			fileuri={fileuri}
+			isVisible={isVisible}
+			setIsVisible={setIsVisible}
+			TakeFromGallery={TakeFromGallery}
+		/>
+	);
 };
 
 export default PhotoPresenter;

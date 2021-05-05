@@ -85,27 +85,7 @@ const HourlyView = (props) => {
 						</BottomSheet>
 					</View>
 				) : !np ? (
-					<View>
-						<NoData onPress={getPerm} />
-						<BottomSheet
-							isVisible={isVisible}
-							containerStyle={{ backgroundColor: "rgba(0.5, 0.25, 0, 0.0)" }}
-						>
-							{List.map((l, i) => (
-								<ListItem
-									key={i}
-									containerStyle={l.containerStyle}
-									onPress={l.onPress}
-								>
-									<ListItem.Content>
-										<ListItem.Title style={l.titleStyle}>
-											{l.title}
-										</ListItem.Title>
-									</ListItem.Content>
-								</ListItem>
-							))}
-						</BottomSheet>
-					</View>
+					<NoData onPress={getPerm} />
 				) : (
 					<View style={styles.container}>
 						<Image source={require("../../assets/NoData.png")} />
