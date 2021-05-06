@@ -1,17 +1,15 @@
+import moment from "moment";
 import React from "react";
 import {
+	FlatList,
+	ImageBackground,
 	SafeAreaView,
 	StyleSheet,
-	TouchableOpacity,
 	Text,
+	TouchableOpacity,
 	View,
-	ImageBackground,
-	FlatList,
-	Touchable,
 } from "react-native";
-import moment from "moment";
 import Config from "react-native-config";
-
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";

@@ -11,10 +11,10 @@ import { Fontisto } from "@expo/vector-icons";
 
 const CityBox = (props) => {
 	const [dimensions, setDimensions] = useState(
-		Dimensions.get("window").height / 4
+		Dimensions.get("window").height / 3
 	);
 	const onChange = () => {
-		setDimensions(Dimensions.get("window").height / 4);
+		setDimensions(Dimensions.get("window").height / 3);
 	};
 	useEffect(() => {
 		Dimensions.addEventListener("change", onChange);
@@ -50,7 +50,6 @@ const CityBox = (props) => {
 						color="black"
 					/>
 					<Text style={styles.temperature}>
-						{" "}
 						{Math.round(props.temp) > 0 ? "+" : ""}
 						{Math.round(props.temp)} C
 					</Text>

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Alert, TouchableOpacity, Text, Touchable } from "react-native";
-import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import { useSelector, useDispatch } from "react-redux";
+import * as Permissions from "expo-permissions";
+import React, { useEffect, useState } from "react";
+import { Alert } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../../store/dailyhourlyactions";
-
 import DailyView from "./DailyView";
 
 export default function DailyPresenter({ navigation }) {

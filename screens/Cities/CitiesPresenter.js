@@ -28,6 +28,7 @@ export default function CitiesScreen({ navigation }) {
 	const onOrientationChange = () => {
 		setFlatListColumns(Dimensions.get("window").width > 600 ? 3 : 2);
 	};
+
 	Dimensions.addEventListener("change", onOrientationChange);
 
 	const timerRef = useRef(null);

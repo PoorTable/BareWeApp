@@ -13,7 +13,6 @@ const HourlyPresenter = ({ navigation }) => {
 	const [isLoading, setisLoading] = useState(false);
 	const dispatch = useDispatch();
 	const SelectedCity = useSelector((state) => state.dailyhoutly.City);
-	const Cities2 = useSelector((state) => state.dailyhoutly.Yesterday);
 	const Cities = useSelector((state) => state.dailyhoutly.Hourly);
 	const SelectedDay = useSelector((state) => state.dailyhoutly.SelectedDay);
 	const np = useSelector((state) => state.weather.error);
@@ -42,16 +41,11 @@ const HourlyPresenter = ({ navigation }) => {
 		}
 	};
 
-	const tit = useSelector((state) => state.dailyhoutly.City.name);
-	const City = useSelector((state) => state.dailyhoutly.dt);
-	const date = moment(Date.now()).format("MMMM, Do");
 	useEffect(() => {
 		const unsubscribe = navigation.addListener("focus", () => {
 			dispatch(dailyhourlyactions.SetDate(0));
 			console.log(SelectedCity.name);
 			navigation.dangerouslyGetParent().setOptions({
-				// headerTitle: SelectedCity.name + " - " + date,
-				// headerTitleAlign: "left",
 				headerRight: () => <Text> </Text>,
 			});
 		});
