@@ -110,7 +110,7 @@ const App = () => {
 				</UserInactivity>
 			) : (
 				<View style={styles.container1}>
-					<Text>You have been innactive for 60 seconds</Text>
+					<Text>You have been innactive for minute</Text>
 					<Text>Please restart the app</Text>
 				</View>
 			)}

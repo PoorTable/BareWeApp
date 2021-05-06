@@ -89,6 +89,7 @@ export default function CitiesScreen({ navigation }) {
 				{ text: "Okay" },
 			]);
 		} finally {
+			setIsRefreshing(false);
 		}
 	};
 

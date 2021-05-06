@@ -25,8 +25,8 @@ export const downloadFile = () => {
 
 	var RNFS = require("react-native-fs");
 
-	var path = RNFS.DocumentDirectoryPath + "/datas.json";
-	let toFile = RNFS.DownloadDirectoryPath + "/datas.json";
+	var path = RNFS.DocumentDirectoryPath + "/datas1.json";
+	let toFile = RNFS.DownloadDirectoryPath + "/datas1.json";
 	console.log(path);
 	RNFS.copyFile(path, toFile).then(
 		Notifications.postLocalNotification({
@@ -44,8 +44,8 @@ export const downloadFile = () => {
 export const openFile = async () => {
 	var RNFS = require("react-native-fs");
 	var path = !IsPlatformIOS()
-		? RNFS.DocumentDirectoryPath + "/datas.json"
-		: RNFS.DocumentDirectoryPath + "/datas.json";
+		? RNFS.DocumentDirectoryPath + "/datas1.json"
+		: RNFS.DocumentDirectoryPath + "/datas1.json";
 	let exists = await RNFS.exists(path);
 	console.log(path);
 	if (exists) {
@@ -70,13 +70,15 @@ export const getYesterday = (lat, lon) => {
 	return async (dispatch, getState) => {
 		var RNFS = require("react-native-fs");
 		var path = !IsPlatformIOS()
-			? RNFS.DocumentDirectoryPath + "/datas.json"
-			: RNFS.DocumentDirectoryPath + "/datas.json";
+			? RNFS.DocumentDirectoryPath + "/datas1.json"
+			: RNFS.DocumentDirectoryPath + "/datas1.json";
 		let exists = await RNFS.exists(path);
 		console.log(path);
 		if (exists) {
 			let a = await RNFS.readFile(path);
 			let JSONFormatted = JSON.parse(a);
+			console.log(new Date(JSONFormatted.current.dt * 1000).getDate());
+			console.log(new Date(Date.now() - 86400000).getDate());
 			if (
 				new Date(JSONFormatted.current.dt * 1000).getDate() ==
 				new Date(Date.now() - 86400000).getDate()

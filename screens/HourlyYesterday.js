@@ -112,7 +112,7 @@ const HourlyYesterday = ({ navigation }) => {
 			await getLoc();
 		};
 		f();
-	}, []);
+	}, [dispatch]);
 
 	const [isVisible, setIsVisible] = useState(false);
 

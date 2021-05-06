@@ -22,7 +22,8 @@ export const fetchCities = () => {
 		);
 
 		if (!response.ok) {
-			throw new Error("Something went wrong");
+			dispatch({ type: SET_LOADING, isLoading: false });
+			dispatch({ type: SET_LOADED, isLoaded: true });
 		}
 		console.log(response.status);
 
