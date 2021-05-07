@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import PhotoView from "./PhotoView";
+import React, { useEffect, useState } from "react";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { useDispatch, useSelector } from "react-redux";
 import * as photoactions from "../../store/photoactions";
-import { useSelector, useDispatch } from "react-redux";
+import PhotoView from "./PhotoView";
 
 const PhotoPresenter = (props) => {
 	const fileuri = useSelector((state) => state.photo.photoURI);

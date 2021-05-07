@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useEffect, useState } from "react";
-import { Linking, StyleSheet, Text, View, Vibration } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { LayoutAnimation, Linking, StyleSheet, Text, View } from "react-native";
 import { Notifications } from "react-native-notifications";
+import { useDimensionsChange } from "react-native-responsive-dimensions";
 import UserInactivity from "react-native-user-inactivity";
 import { Provider, useDispatch } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
@@ -88,7 +89,11 @@ const App = () => {
 
 		prepare();
 	}, [dispatch]);
-
+	useDimensionsChange(
+		useCallback(({ window, screen }) => {
+			LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+		}, [])
+	);
 	const [active, setActive] = useState(true);
 	const [timer, setTimer] = useState(60000);
 	return (

@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Alert, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as weatherActions from "../../store/weatheractions";
-import { FAB } from "react-native-elements";
-
 import CitiesView from "./CitiesView";
 
 export default function CitiesScreen({ navigation }) {

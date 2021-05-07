@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import moment from "moment";
-import { Alert, Button, Platform, Text, Vibration } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../../store/dailyhourlyactions";
 import HourlyView from "./HourlyView";

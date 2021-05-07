@@ -1,23 +1,18 @@
 import React from "react";
 import {
-	StyleSheet,
+	FlatList,
+	Image,
 	ImageBackground,
+	SafeAreaView,
+	StyleSheet,
 	Text,
 	View,
-	Image,
-	FlatList,
-	SafeAreaView,
-	Button,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { FAB } from "react-native-elements";
-import HeaderInput from "../../components/HeaderInput";
+import Config from "react-native-config";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";
+import HeaderInput from "../../components/HeaderInput";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
-import Config from "react-native-config";
-
-import * as weatherActions from "../../store/weatheractions";
 
 export default function CitiesScreen({ navigation, ...props }) {
 	const {

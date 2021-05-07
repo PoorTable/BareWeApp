@@ -2,18 +2,17 @@ import moment from "moment";
 import React from "react";
 import {
 	FlatList,
+	ImageBackground,
 	SafeAreaView,
 	StyleSheet,
-	ImageBackground,
 	Text,
 	View,
-	Vibration,
 } from "react-native";
+import Config from "react-native-config";
 import { BottomSheet, ListItem } from "react-native-elements";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
-import Config from "react-native-config";
 
 const HourlyView = (props) => {
 	const {

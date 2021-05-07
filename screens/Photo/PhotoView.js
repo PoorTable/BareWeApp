@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { BottomSheet, ListItem } from "react-native-elements";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Config from "react-native-config";
+import { BottomSheet, ListItem } from "react-native-elements";
 
 const PhotoView = (props) => {
 	const {

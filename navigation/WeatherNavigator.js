@@ -7,7 +7,7 @@ import {
 } from "@react-navigation/stack";
 import moment from "moment";
 import React from "react";
-import { Platform } from "react-native";
+import Config from "react-native-config";
 import { useSelector } from "react-redux";
 import CitiesPresenter, {
 	screenOptions as CitiesScreenOptions,
@@ -17,13 +17,11 @@ import DailyPresenter, {
 } from "../screens/Daily/DailyPresenter";
 import HourlyPresenter from "../screens/Hourly/HourlyPresenter";
 import HourlyYesterday from "../screens/HourlyYesterday";
+import PhotoPresenter from "../screens/Photo/PhotoPresenter";
 import SelectedCityScreen, {
 	screenOptions as SelectedCityScreenOptions,
 } from "../screens/SelectedCityScreen";
 import { IsPlatformIOS } from "../services/PlatformController";
-import PhotoPresenter from "../screens/Photo/PhotoPresenter";
-import { TouchableOpacity, Text } from "react-native";
-import Config from "react-native-config";
 const WeatherStack = createStackNavigator();
 
 export const WS = () => {
