@@ -10,7 +10,7 @@ import {
 	Button,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
+import { FAB } from "react-native-elements";
 import HeaderInput from "../../components/HeaderInput";
 import CityBox from "../../components/CityBox";
 import CityLine from "../../components/CityLine";

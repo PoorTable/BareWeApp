@@ -23,7 +23,7 @@ import SelectedCityScreen, {
 import { IsPlatformIOS } from "../services/PlatformController";
 import PhotoPresenter from "../screens/Photo/PhotoPresenter";
 import { TouchableOpacity, Text } from "react-native";
-
+import Config from "react-native-config";
 const WeatherStack = createStackNavigator();
 
 export const WS = () => {
@@ -114,10 +114,10 @@ const BottomTab = createMaterialBottomTabNavigator();
 export const BottomTabs = () => {
 	return (
 		<BottomTab.Navigator
-			activeColor="#f0edf6"
-			inactiveColor="#3e2465"
-			barStyle={{ backgroundColor: "#694fad" }}
-			labelStyle={{ fontSize: 12 }}
+			activeColor={Config.ACTIVE_BOTTOM_BAR}
+			inactiveColor={Config.INNACTIVE_BOTTOM_BAR}
+			barStyle={{ backgroundColor: Config.BACKGROUND_BAR_STYLE }}
+			labelStyle={{ fontSize: 12, width: "33%" }}
 			screenOptions={{
 				unmountOnBlur: true,
 			}}
