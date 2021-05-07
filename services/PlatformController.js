@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Platform } from "react-native";
 
 var IsIOS = false;
