@@ -31,8 +31,6 @@ const CityBox = (props) => {
 				margin: 15,
 				borderWidth: 2,
 				borderRadius: 5,
-				flexDirection: "column",
-				justifyContent: "space-around",
 			}}
 			onPress={props.onClick}
 		>
@@ -41,7 +39,12 @@ const CityBox = (props) => {
 					<ActivityIndicator size="large" color="#0000ff" />
 				</View>
 			) : (
-				<View>
+				<View
+					style={{
+						flex: 1,
+						justifyContent: "space-around",
+					}}
+				>
 					<Text style={styles.CitiBoxName}>{props.cityName}</Text>
 					<Fontisto
 						style={styles.CityIcon}
@@ -87,7 +90,12 @@ const styles = StyleSheet.create({
 	centred: {
 		flex: 1,
 		alignItems: "center",
+		alignContent: "space-between",
 		justifyContent: "center",
+	},
+	bbox: {
+		flex: 1,
+		alignContent: "space-between",
 	},
 });
 
