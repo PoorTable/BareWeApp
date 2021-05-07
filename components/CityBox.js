@@ -11,10 +11,14 @@ import { Fontisto } from "@expo/vector-icons";
 
 const CityBox = (props) => {
 	const [dimensions, setDimensions] = useState(
-		Dimensions.get("window").height / 3
+		Dimensions.get("window").height / 4
 	);
 	const onChange = () => {
-		setDimensions(Dimensions.get("window").height / 3);
+		if (Dimensions.get("window").height < Dimensions.get("window").width) {
+			setDimensions(Dimensions.get("window").height / 3);
+		} else {
+			setDimensions(Dimensions.get("window").height / 4);
+		}
 	};
 	useEffect(() => {
 		Dimensions.addEventListener("change", onChange);
