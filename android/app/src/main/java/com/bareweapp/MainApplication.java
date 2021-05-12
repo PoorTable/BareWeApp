@@ -3,7 +3,6 @@ package com.bareweapp;
 import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage; 
 import com.wix.reactnativenotifications.RNNotificationsPackage;
 
 import com.facebook.react.PackageList;

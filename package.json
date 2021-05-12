@@ -32,7 +32,6 @@
     "react-native-image-picker": "^3.5.0",
     "react-native-notifications": "^3.4.2",
     "react-native-paper": "^4.8.0",
-    "react-native-push-notification": "^7.2.3",
     "react-native-reanimated": "~2.1.0",
     "react-native-responsive-dimensions": "^3.1.1",
     "react-native-safe-area-context": "^3.2.0",
