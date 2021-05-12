@@ -42,6 +42,7 @@ const HourlyYesterday = ({ navigation }) => {
 
 	const getLoc = async () => {
 		setisLoading(true);
+
 		try {
 			var loca = await Location.getCurrentPositionAsync({});
 			setLocation(loca);
@@ -52,14 +53,8 @@ const HourlyYesterday = ({ navigation }) => {
 			setisLoading(false);
 			return;
 		}
-		try {
-			await dispatch(
-				dailyhourlyactions.getCityName(
-					loca.coords.latitude,
-					loca.coords.longitude
-				)
-			);
 
+		try {
 			await dispatch(
 				dailyhourlyactions.getYesterday(
 					loca.coords.latitude,
@@ -72,6 +67,18 @@ const HourlyYesterday = ({ navigation }) => {
 			Alert.alert("Error", "Something went wrong during network call", [
 				{ text: "Okay" },
 			]);
+		} finally {
+			setisLoading(false);
+		}
+		try {
+			await dispatch(
+				dailyhourlyactions.getCityName(
+					loca.coords.latitude,
+					loca.coords.longitude
+				)
+			);
+			setisLoading(false);
+			return;
 		} finally {
 			setisLoading(false);
 		}
