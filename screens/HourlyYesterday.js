@@ -56,22 +56,6 @@ const HourlyYesterday = ({ navigation }) => {
 
 		try {
 			await dispatch(
-				dailyhourlyactions.getYesterday(
-					loca.coords.latitude,
-					loca.coords.longitude
-				)
-			);
-			setisLoading(false);
-			return;
-		} catch (error) {
-			Alert.alert("Error", "Something went wrong during network call", [
-				{ text: "Okay" },
-			]);
-		} finally {
-			setisLoading(false);
-		}
-		try {
-			await dispatch(
 				dailyhourlyactions.getCityName(
 					loca.coords.latitude,
 					loca.coords.longitude
@@ -85,8 +69,25 @@ const HourlyYesterday = ({ navigation }) => {
 	};
 
 	const date = moment(Date.now() - 86400000).format("MMMM, Do");
-	useEffect(() => {
-		const unsubscribe = navigation.addListener("focus", () => {
+	useEffect(async () => {
+		const unsubscribe = navigation.addListener("focus", async () => {
+			var loca = await Location.getCurrentPositionAsync({});
+			console.log(loca.coords.latitude);
+			try {
+				await dispatch(
+					dailyhourlyactions.getYesterday(
+						loca.coords.latitude,
+						loca.coords.longitude
+					)
+				);
+				setisLoading(false);
+			} catch (error) {
+				Alert.alert("Error", "Something went wrong during network call", [
+					{ text: "Okay" },
+				]);
+			} finally {
+				setisLoading(false);
+			}
 			dispatch(dailyhourlyactions.SetDate(1));
 			navigation.dangerouslyGetParent().setOptions({
 				headerRight: () => (
