@@ -18,6 +18,7 @@ import dailyhoutlyreducer from "./store/dailyhourlyreducer";
 import photoreducer from "./store/photoreducer";
 import * as weatherActions from "./store/weatheractions";
 import weatherreducer from "./store/weatherreducer";
+import AnimatedSplash from "react-native-animated-splash-screen";
 
 const rootReducer = combineReducers({
 	weather: weatherreducer,
@@ -39,6 +40,7 @@ const AppWrapper = () => {
 };
 
 const App = () => {
+	const [isLoaded, setIsLoaded] = useState(false);
 	const dispatch = useDispatch();
 
 	Notifications.events().registerNotificationReceivedForeground(
@@ -52,16 +54,13 @@ const App = () => {
 
 	Notifications.events().registerNotificationOpened(
 		(notification, completion) => {
-			completion(
-				() => {
-					if (IsPlatformIOS()) {
-						Linking.openURL("calshow:");
-					} else {
-						Linking.openURL("content://com.android.calendar/time/");
-					}
+			completion(() => {
+				if (IsPlatformIOS()) {
+					Linking.openURL("calshow:");
+				} else {
+					Linking.openURL("content://com.android.calendar/time/");
 				}
-				// IsPlatformIOS() ? null : dispatch(dailyhourlyactions.openFile())
-			);
+			});
 			if (IsPlatformIOS()) {
 				Linking.openURL("calshow:");
 			} else {
@@ -83,6 +82,7 @@ const App = () => {
 			} catch (e) {
 				console.warn(e);
 			} finally {
+				setIsLoaded(true);
 				await SplashScreen.hideAsync();
 			}
 		}
@@ -97,29 +97,38 @@ const App = () => {
 	const [active, setActive] = useState(true);
 	const [timer, setTimer] = useState(60000);
 	return (
-		<Provider store={store}>
-			{active ? (
-				<UserInactivity
-					isActive={active}
-					timeForInactivity={timer}
-					onAction={(isActive) => {
-						setActive(isActive);
-						console.log("s");
-					}}
-					skipKeyboard={false}
-					style={{ flex: 1 }}
-				>
-					<NavigationContainer>
-						<BottomTabs />
-					</NavigationContainer>
-				</UserInactivity>
-			) : (
-				<View style={styles.container1}>
-					<Text>You have been innactive for minute</Text>
-					<Text>Please restart the app</Text>
-				</View>
-			)}
-		</Provider>
+		<AnimatedSplash
+			translucent={true}
+			isLoaded={isLoaded}
+			logoImage={require("./assets/icon.png")}
+			backgroundColor={"#262626"}
+			logoHeight={150}
+			logoWidth={150}
+		>
+			<Provider store={store}>
+				{active ? (
+					<UserInactivity
+						isActive={active}
+						timeForInactivity={timer}
+						onAction={(isActive) => {
+							setActive(isActive);
+							console.log("s");
+						}}
+						skipKeyboard={false}
+						style={{ flex: 1 }}
+					>
+						<NavigationContainer>
+							<BottomTabs />
+						</NavigationContainer>
+					</UserInactivity>
+				) : (
+					<View style={styles.container1}>
+						<Text>You have been innactive for minute</Text>
+						<Text>Please restart the app</Text>
+					</View>
+				)}
+			</Provider>
+		</AnimatedSplash>
 	);
 };
 
