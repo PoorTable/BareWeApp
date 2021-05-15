@@ -123,7 +123,7 @@ const App = () => {
 					</UserInactivity>
 				) : (
 					<View style={styles.container1}>
-						<Text>You have been innactive for minute</Text>
+						<Text>Your session is expired</Text>
 						<Text>Please restart the app</Text>
 					</View>
 				)}
