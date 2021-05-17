@@ -3,6 +3,7 @@ import { Alert, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as weatherActions from "../../store/weatheractions";
 import CitiesView from "./CitiesView";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function CitiesScreen({ navigation }) {
 	useEffect(() => {
@@ -24,6 +25,7 @@ export default function CitiesScreen({ navigation }) {
 	const Cities = useSelector((state) => state.weather.cities);
 	var Citiy = useSelector((state) => state.weather.city);
 	const loading = useSelector((state) => state.weather.isLoading);
+	const netInfo = useNetInfo();
 
 	const onOrientationChange = () => {
 		setFlatListColumns(Dimensions.get("window").width > 600 ? 3 : 2);
@@ -89,6 +91,7 @@ export default function CitiesScreen({ navigation }) {
 			Alert.alert("Error", "Something went wrong during network call", [
 				{ text: "Okay" },
 			]);
+			setIsRefreshing(false);
 		} finally {
 			setIsRefreshing(false);
 		}
@@ -111,6 +114,7 @@ export default function CitiesScreen({ navigation }) {
 			changeTextHandler={changeTextHandler}
 			isEmpty={isEmpty}
 			flatListColumns={flatListColumns}
+			netInfo={netInfo}
 		/>
 	);
 }

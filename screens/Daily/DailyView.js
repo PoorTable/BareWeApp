@@ -8,14 +8,17 @@ import {
 	Text,
 	TouchableOpacity,
 	View,
+	Image,
 } from "react-native";
 import Config from "react-native-config";
 import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
+import { FAB } from "react-native-elements";
 
 const DailyView = (props) => {
-	const { ps, isLoading, pTRHandler, Cities, getPerm, PhotoHandler } = props;
+	const { ps, isLoading, pTRHandler, Cities, getPerm, PhotoHandler, netInfo } =
+		props;
 	return (
 		<SafeAreaView style={styles.fl}>
 			<ImageBackground
@@ -24,7 +27,18 @@ const DailyView = (props) => {
 				}}
 				style={{ flex: 1 }}
 			>
-				{isLoading ? (
+				{!netInfo.isInternetReachable ? (
+					<View style={styles.container}>
+						<View style={styles.centred}>
+							<Image source={require("../../assets/NoData.png")} />
+							<Text style={styles.Name}>Cannot get an update</Text>
+
+							<Text style={styles.descr}>
+								Please check your connection to the internet
+							</Text>
+						</View>
+					</View>
+				) : isLoading ? (
 					<ModalActivityIndcator show={true} />
 				) : ps ? (
 					<View>
@@ -47,19 +61,13 @@ const DailyView = (props) => {
 								}}
 							/>
 						</View>
-						<TouchableOpacity onPress={PhotoHandler}>
-							<Text>Go to Photos</Text>
-						</TouchableOpacity>
 					</View>
 				) : (
-					<View>
+					<View style={styles.container}>
 						<NoData onPress={getPerm} />
-
-						<TouchableOpacity onPress={PhotoHandler}>
-							<Text>Go to Photos</Text>
-						</TouchableOpacity>
 					</View>
 				)}
+				<FAB title="Photos" placement="left" onPress={PhotoHandler} />
 			</ImageBackground>
 		</SafeAreaView>
 	);

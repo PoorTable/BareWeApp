@@ -27,27 +27,40 @@ export default function CitiesScreen({ navigation, ...props }) {
 		isRefreshing,
 		changeTextHandler,
 		isEmpty,
+		netInfo,
 	} = props;
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.searchBar}>
-				<HeaderInput
-					value={searchText}
-					onChangeText={(text) => changeTextHandler(text)}
-					isEmpty={isEmpty}
-					onClick={() => {
-						ClearText();
-					}}
-				/>
-			</View>
 			<ImageBackground
 				source={{
 					uri: Config.BACKGROUND,
 				}}
 				style={{ flex: 1 }}
 			>
-				{loading ? (
+				<View style={styles.searchBar}>
+					<HeaderInput
+						value={searchText}
+						onChangeText={(text) => changeTextHandler(text)}
+						isEmpty={isEmpty}
+						onClick={() => {
+							ClearText();
+						}}
+					/>
+				</View>
+
+				{!netInfo.isInternetReachable ? (
+					<View style={styles.container}>
+						<View style={styles.centred}>
+							<Image source={require("../../assets/NoData.png")} />
+							<Text style={styles.Name}>Cannot get an update</Text>
+
+							<Text style={styles.descr}>
+								Please check your connection to the internet
+							</Text>
+						</View>
+					</View>
+				) : loading ? (
 					<ModalActivityIndcator show={true} />
 				) : searchText === "" ? (
 					<FlatList
@@ -119,9 +132,20 @@ const styles = StyleSheet.create({
 		width: "90%",
 		marginStart: "5%",
 	},
+	Name: {
+		paddingVertical: 5,
+		fontFamily: "Roboto-LightItalic",
+		fontWeight: "bold",
+		color: "black",
+		fontSize: 20,
+	},
+	descr: {
+		paddingVertical: 5,
+	},
+
 	results: { alignItems: "center", justifyContent: "center" },
 	searchBar: {
-		marginTop: 15,
+		marginTop: 25,
 		width: "100%",
 		alignItems: "center",
 		justifyContent: "center",

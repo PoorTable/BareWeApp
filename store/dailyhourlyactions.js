@@ -86,6 +86,8 @@ export const getYesterday = (lat, lon) => {
 		var RNFS = require("react-native-fs");
 		let path = RNFS.DocumentDirectoryPath + "/forecast.json";
 		let exists = await RNFS.exists(path);
+		console.log(path);
+		console.log(exists);
 		if (exists) {
 			let a = await RNFS.readFile(path);
 			let JSONFormatted = JSON.parse(a);
@@ -95,6 +97,7 @@ export const getYesterday = (lat, lon) => {
 				new Date(JSONFormatted.current.dt * 1000).getDate() ==
 				new Date(Date.now() - 86400000).getDate()
 			) {
+				console.log(1);
 				const Hourly = JSONFormatted.hourly;
 				let yesterdayForecast = await ParseArray(Hourly);
 				const dt = Hourly[0].dt * 1000;

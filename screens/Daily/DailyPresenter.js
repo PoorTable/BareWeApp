@@ -5,12 +5,14 @@ import { Alert } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../../store/dailyhourlyactions";
 import DailyView from "./DailyView";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function DailyPresenter({ navigation }) {
 	const [location, setLocation] = useState(null);
 	const [ps, setPs] = useState(false);
 	const [isLoading, setisLoading] = useState(false);
 	const dispatch = useDispatch();
+	const netInfo = useNetInfo();
 	const Cities = useSelector((state) => state.dailyhoutly.Daily);
 	var Cities1 = Cities;
 	const getPerm = async () => {
@@ -105,6 +107,7 @@ export default function DailyPresenter({ navigation }) {
 			Cities={Cities}
 			getPerm={getPerm}
 			PhotoHandler={PhotoHandler}
+			netInfo={netInfo}
 		/>
 	);
 }

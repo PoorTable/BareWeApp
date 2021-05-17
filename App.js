@@ -100,10 +100,10 @@ const App = () => {
 		<AnimatedSplash
 			translucent={true}
 			isLoaded={isLoaded}
-			logoImage={require("./assets/icon.png")}
+			logoImage={require("./assets/splash.png")}
 			backgroundColor={"#262626"}
-			logoHeight={150}
-			logoWidth={150}
+			logoHeight={2310}
+			logoWidth={1080}
 		>
 			<Provider store={store}>
 				{active ? (

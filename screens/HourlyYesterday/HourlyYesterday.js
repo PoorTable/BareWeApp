@@ -2,13 +2,21 @@ import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import moment from "moment";
-import { Alert, Button, Platform, Text } from "react-native";
+import {
+	Alert,
+	Button,
+	Platform,
+	Text,
+	PermissionsAndroid,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import * as dailyhourlyactions from "../store/dailyhourlyactions";
-import HourlyView from "./Hourly/HourlyView";
-import { IsPlatformIOS } from "../services/PlatformController";
+import * as dailyhourlyactions from "../../store/dailyhourlyactions";
+import HourlyYesterdayView from "./HourlyYesterdayView";
+import { IsPlatformIOS } from "../../services/PlatformController";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const HourlyYesterday = ({ navigation }) => {
+	const netInfo = useNetInfo();
 	const [location, setLocation] = useState(null);
 	const [ps, setPs] = useState(false);
 	const [isLoading, setisLoading] = useState(false);
@@ -114,6 +122,25 @@ const HourlyYesterday = ({ navigation }) => {
 
 	useEffect(() => {
 		let f = async () => {
+			try {
+				const granted = await PermissionsAndroid.request(
+					PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+					{
+						title: "Cool Photo App Camera Permission",
+						message: "Cool Photo App needs access to your Storage ",
+						buttonNeutral: "Ask Me Later",
+						buttonNegative: "Cancel",
+						buttonPositive: "OK",
+					}
+				);
+				if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+					console.log("You can use the Storage");
+				} else {
+					console.log("Storage permission denied");
+				}
+			} catch (err) {
+				console.warn(err);
+			}
 			await getPermStatus();
 			await getLoc();
 		};
@@ -128,7 +155,7 @@ const HourlyYesterday = ({ navigation }) => {
 	};
 
 	return (
-		<HourlyView
+		<HourlyYesterdayView
 			location={location}
 			ps={ps}
 			isLoading={isLoading}

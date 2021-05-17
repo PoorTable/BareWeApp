@@ -15,7 +15,7 @@ import CityLine from "../../components/CityLine";
 import ModalActivityIndcator from "../../components/ModalActivityIndicator";
 import NoData from "../../components/NoData";
 
-const HourlyView = (props) => {
+const HourlyYesterdayView = (props) => {
 	const {
 		ps,
 		isLoading,
@@ -47,18 +47,7 @@ const HourlyView = (props) => {
 				}}
 				style={{ flex: 1 }}
 			>
-				{!netInfo.isInternetReachable ? (
-					<View style={styles.container}>
-						<View style={styles.centred}>
-							<Image source={require("../../assets/NoData.png")} />
-							<Text style={styles.Name}>Cannot get an update</Text>
-
-							<Text style={styles.descr}>
-								Please check your connection to the internet
-							</Text>
-						</View>
-					</View>
-				) : isLoading ? (
+				{isLoading ? (
 					<ModalActivityIndcator show={true} />
 				) : ps ? (
 					<View style={styles.sr}>
@@ -96,7 +85,7 @@ const HourlyView = (props) => {
 							))}
 						</BottomSheet>
 					</View>
-				) : np ? (
+				) : (
 					<View style={styles.container}>
 						<Image source={require("../../assets/NoData.png")} />
 						<Text style={styles.Name}>Cannot get an update</Text>
@@ -105,8 +94,6 @@ const HourlyView = (props) => {
 							Please check your connection to the internet
 						</Text>
 					</View>
-				) : (
-					<NoData onPress={getPerm} />
 				)}
 			</ImageBackground>
 		</SafeAreaView>
@@ -161,4 +148,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default HourlyView;
+export default HourlyYesterdayView;

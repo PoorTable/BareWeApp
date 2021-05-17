@@ -16,7 +16,7 @@ import DailyPresenter, {
 	screenOptions as DailyScreenOptions,
 } from "../screens/Daily/DailyPresenter";
 import HourlyPresenter from "../screens/Hourly/HourlyPresenter";
-import HourlyYesterday from "../screens/HourlyYesterday";
+import HourlyYesterday from "../screens/HourlyYesterday/HourlyYesterday";
 import PhotoPresenter from "../screens/Photo/PhotoPresenter";
 import SelectedCityScreen, {
 	screenOptions as SelectedCityScreenOptions,

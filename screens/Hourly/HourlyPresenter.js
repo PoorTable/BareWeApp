@@ -6,8 +6,10 @@ import { Alert, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import * as dailyhourlyactions from "../../store/dailyhourlyactions";
 import HourlyView from "./HourlyView";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const HourlyPresenter = ({ navigation }) => {
+	const netInfo = useNetInfo();
 	const [location, setLocation] = useState(null);
 	const [ps, setPs] = useState(false);
 	const [isLoading, setisLoading] = useState(false);
@@ -15,7 +17,7 @@ const HourlyPresenter = ({ navigation }) => {
 	const SelectedCity = useSelector((state) => state.dailyhoutly.City);
 	const Cities = useSelector((state) => state.dailyhoutly.Hourly);
 	const SelectedDay = useSelector((state) => state.dailyhoutly.SelectedDay);
-	const np = useSelector((state) => state.weather.error);
+	const [np, setNp] = useState(false);
 	var Cities1 = Cities;
 	const getPerm = async () => {
 		const { status, permissions } = await Permissions.askAsync(
@@ -90,12 +92,13 @@ const HourlyPresenter = ({ navigation }) => {
 			}
 
 			setisLoading(false);
-			return;
 		} catch (error) {
+			setNp(true);
 			Alert.alert("Error", "Something went wrong during network call", [
 				{ text: "Okay" },
 			]);
 		} finally {
+			setNp(true);
 			setisLoading(false);
 		}
 	};
@@ -132,6 +135,7 @@ const HourlyPresenter = ({ navigation }) => {
 			np={np}
 			downloadFile={downloadFile}
 			openFile={openFile}
+			netInfo={netInfo}
 		/>
 	);
 };

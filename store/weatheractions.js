@@ -17,11 +17,12 @@ export const fetchCities = () => {
 		if (getState().weather.cities.length > 0) {
 			dispatch({ type: SET_LOADING, isLoading: true });
 		}
+
 		const response = await fetch(
 			`http://api.openweathermap.org/data/2.5/box/city?bbox=26,49,27,52,10&appid=${apik}`
 		);
 
-		if (!response.ok) {
+		if (response.status !== 200) {
 			dispatch({ type: SET_LOADING, isLoading: false });
 			dispatch({ type: SET_LOADED, isLoaded: true });
 		}
