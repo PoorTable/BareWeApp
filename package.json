@@ -21,7 +21,7 @@
     "expo-updates": "~0.5.4",
     "moment": "^2.29.1",
     "react": "16.13.1",
-    "react-devtools": "^4.12.4",
+    "react-devtools": "^4.13.2",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-config": "^1.4.2",
